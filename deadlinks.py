@@ -563,7 +563,8 @@ def main():
     parser.add_argument("urls", nargs="*", help="URLs to check")
     parser.add_argument("--file", "-f", metavar="FILE",
                         help="File with URLs, one per line")
-    parser.add_argument("--depth", "-d", type=int, default=1,
+    parser.add_argument("--depth", "--max-depth", "-d", dest="depth",
+                        type=int, default=1,
                         help="Crawl depth (default: 1; 0 = only the given page)")
     parser.add_argument("--timeout", "-t", type=int, default=10,
                         help="Request timeout in seconds (default: 10)")

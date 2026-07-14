@@ -32,6 +32,7 @@ positional arguments:
 options:
   -f, --file FILE       File with URLs (one per line, # = comment)
   -d, --depth N         Crawl depth (default: 1; 0 = single page only)
+      --max-depth N     Alias for --depth
   -t, --timeout N       Request timeout in seconds (default: 10)
   --rate-limit N        Delay between requests per host (default: 0.1s)
   -w, --workers N       Concurrent workers (default: 10)
@@ -67,6 +68,9 @@ deadlinks https://example.com --workers 20 --rate-limit 0.05
 
 # Check just one page without following links
 deadlinks https://example.com --depth 0
+
+# Same single-page check, using crawler-style wording
+deadlinks https://example.com --max-depth 0
 ```
 
 ---
