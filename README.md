@@ -82,7 +82,7 @@ deadlinks https://example.com --max-depth 0
 3. **Resolve** relative URLs against the base page
 4. **Check** each link concurrently (HEAD first, GET fallback for 405/501)
 5. **Report** broken links (4xx, 5xx, timeout, SSL error, DNS failure)
-6. **Recurse** into same-domain HTML pages up to `--depth`
+6. **Recurse** into same-domain HTML pages up to `--depth` (or external pages too with `--external`)
 
 ### Edge Cases Handled
 

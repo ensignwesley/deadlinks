@@ -273,13 +273,15 @@ class DeadLinkChecker:
             page_results = self._check_links_concurrent(links)
             results[url] = page_results
 
-            # Enqueue same-domain pages for deeper crawl
+            # Enqueue crawlable pages for deeper crawl. By default, stay on
+            # the start URL's domain; --external deliberately expands the
+            # frontier to external domains too.
             if depth < max_depth:
                 for result in page_results:
                     if result.skipped or result.is_broken:
                         continue
                     link_domain = urlparse(result.url).netloc
-                    if link_domain != base_domain:
+                    if not self.follow_external and link_domain != base_domain:
                         continue
                     with self._crawled_lock:
                         already = result.url in self._crawled
