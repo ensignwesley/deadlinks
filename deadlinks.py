@@ -118,9 +118,10 @@ class DeadLinkChecker:
             )
             elapsed_ms = (time.time() - start) * 1000
 
-            # Some servers refuse HEAD — fall back to GET (stream to avoid
-            # downloading the entire body)
-            if resp.status_code in (405, 501):
+            # Some servers either refuse HEAD outright or return a different
+            # error for HEAD than GET. Since browsers exercise GET, confirm
+            # every failing HEAD with a streamed GET before declaring broken.
+            if resp.status_code >= 400:
                 resp = self.session.get(
                     url, timeout=self.timeout,
                     allow_redirects=True, stream=True

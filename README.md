@@ -80,7 +80,7 @@ deadlinks https://example.com --max-depth 0
 1. **Fetch** the page (GET)
 2. **Extract** all `href` and `src` attributes from `<a>`, `<link>`, `<img>`, `<script>`, `<iframe>`, `<video>`, `<source>`
 3. **Resolve** relative URLs against the base page
-4. **Check** each link concurrently (HEAD first, GET fallback for 405/501)
+4. **Check** each link concurrently (HEAD first, streamed GET confirmation for any failing HEAD)
 5. **Report** broken links (4xx, 5xx, timeout, SSL error, DNS failure)
 6. **Recurse** into same-domain HTML pages up to `--depth` (or external pages too with `--external`)
 
@@ -92,7 +92,7 @@ deadlinks https://example.com --max-depth 0
 | Anchor links (`#id`) | Skipped (not broken) |
 | `mailto:` / `tel:` | Skipped |
 | `data:` / `javascript:` | Skipped |
-| HEAD not supported (405) | Falls back to GET |
+| HEAD returns an error | Confirms with a streamed GET before marking broken |
 | Timeouts | Reported as broken |
 | SSL errors | Reported as broken |
 | DNS failures | Reported as broken |
