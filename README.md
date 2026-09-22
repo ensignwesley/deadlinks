@@ -130,7 +130,17 @@ When broken links are found, `--fix` suggests corrections:
 
 ---
 
-## Cron Job (Weekly Blog Check)
+## Testing
+
+Run the regression suite for crawl-domain boundaries and HEAD-to-GET fallback behavior:
+
+```bash
+python3 -m unittest -v test_deadlinks.py
+```
+
+---
+
+## Scheduled Blog Check
 
 Add a weekly check of your blog:
 ```bash
